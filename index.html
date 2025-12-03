@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Hub de Projetos</title>
+  <style>
+    /* ===== RESET BÁSICO ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ===== ESTILO GERAL ===== */
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: linear-gradient(180deg, #fafafa, #eaeaea);
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitulo {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1rem;
+    }
+
+    /* ===== GRID DE CARDS ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 600px) {
+      header {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .subtitulo {
+        font-size: 0.9rem;
+      }
+
+      .card {
+        padding: 1.2rem;
+      }
+
+      .card h2 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚀 Meu Hub de Projetos</h1>
+    <p class="subtitulo">Acesse rapidamente todos os meus webapps pessoais</p>
+  </header>
+
+  <main>
+    <div class="grid">
+	
+      <a href="projetos/limite_mei/index.html" target="_blank" class="card">
+        <h2>Registro MEI </h2>
+        <p>Registro de valores recebidos em Pix / Dinheiro.</p>
+      </a>
+	  
+	  <a href="projetos/controle_mercado/index.html" target="_blank" class="card">
+        <h2>Listas de Compras </h2>
+        <p>Registra valores dos produtos do mercado para calculo.</p>
+      </a>
+      
+    </div>
+  </main>
+
+  <footer>
+    <p>Feito com ❤️ por mim • 2025</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controle MEI</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <div class="container">
+    <h1>Faturamento MEI</h1>
+
+    <div class="progress-container">
+      <div id="progressBar" class="progress-bar" style="width: 0%; background: green;"></div>
+    </div>
+    <div class="info">
+      <span id="valorAtual">R$ 0,00</span>
+      <span>Limite: R$ 6.750</span>
+      <span id="restante">R$ 6.750</span>
+    </div>
+
+    <input type="text" id="valor" placeholder="Valor (R$)" inputmode="numeric" />
+    <select id="metodo">
+      <option value="pix">Pix</option>
+      <option value="app">App</option>
+      <option value="dinheiro">Dinheiro</option>
+    </select>
+    <button onclick="adicionarGanho()">Adicionar</button>
+    <button id="limparDados" style="background: #ef4444;">Limpar</button>
+
+
+    <h3 style="margin-top: 1rem; font-size: 1rem;">Ganhos registrados</h3>
+	<div style="margin: 1rem 0; text-align: center;">
+  <label>
+    <div class="switch-container">
+  <label class="switch">
+    <input type="checkbox" id="filtroData">
+    <span class="slider"></span>
+  </label>
+  <span id="switchLabel">Mostrar ganhos do mês</span>
+</div>
+
+  </label>
+</div>
+
+    <div id="historico"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

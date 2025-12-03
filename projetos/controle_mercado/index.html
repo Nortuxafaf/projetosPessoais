@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Compras</title>
+    <link rel="stylesheet" href="style.css">
+	<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f6a623">
+
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+</head>
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js")
+    .then(() => console.log("Service Worker registrado!"))
+    .catch(err => console.log("Erro ao registrar Service Worker:", err));
+}
+</script>
+
+<body>
+
+    <header class="topo">
+        Lista de compras
+    </header>
+
+    <main class="conteudo">
+
+        <!-- LISTA FICA EM CIMA -->
+		<p id="totalCompras" class="total">Total: R$ 0,00</p>
+
+        <ul id="listaProdutos" class="lista"></ul>
+
+        <!-- TEXTO CLICÁVEL FICA EMBAIXO -->
+        <p class="add-text" onclick="abrirPopup()">Adicionar produto</p>
+		<p class="add-text" onclick="compartilharLista()">Compartilhar lista</p>
+
+
+    </main>
+
+    <!-- POPUP -->
+    <div id="popup" class="popup">
+        <div class="popup-box">
+            <h2>Adicionar produto</h2>
+
+            <label>Quantidade</label>
+            <input type="number" id="inputQuantidade">
+
+            <label>Produto</label>
+            <input type="text" id="inputProduto">
+
+            <label>Valor da unidade (R$)</label>
+            <input type="number" id="inputValor" step="0.01">
+
+            <button class="btn-salvar" onclick="salvarProduto()">Salvar</button>
+            <button class="btn-fechar" onclick="fecharPopup()">Cancelar</button>
+        </div>
+    </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
