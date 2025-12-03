@@ -3,9 +3,7 @@ function abrirPopup() {
     document.getElementById("popup").style.display = "flex";
 }
 
-document.addEventListener('gesturestart', function (e) {
-    e.preventDefault();
-});
+
 
 
 function fecharPopup() {
