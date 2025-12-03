@@ -5,16 +5,49 @@ function abrirPopup() {
 
 function fecharPopup() {
     document.getElementById("popup").style.display = "none";
+    // Limpar campos
+    document.getElementById("inputQuantidade").value = "";
+    document.getElementById("inputProduto").value = "";
+    document.getElementById("inputValor").value = "";
 }
+
+// ---- FORMATAR VALOR AUTOMATICAMENTE ----
+function formatarValorInput(event) {
+    let input = event.target;
+    // Pega apenas os dígitos e remove qualquer coisa que não seja número
+    let valor = input.value.replace(/\D/g, "");
+
+    if (valor.length > 0) {
+        // Divide o valor em centavos e reais (sempre considera os últimos 2 dígitos como centavos)
+        let reais = valor.slice(0, -2);
+        let centavos = valor.slice(-2);
+
+        // Se só tiver centavos (ex: 5 -> 0,05)
+        if (reais.length === 0) {
+            reais = "0";
+        }
+        
+        // Constrói a string final no formato 'Reais,Centavos'
+        input.value = `${reais},${centavos}`;
+    }
+}
+
 
 // ---- SALVAR ITEM ----
 function salvarProduto() {
     const quantidade = document.getElementById("inputQuantidade").value;
     const produto = document.getElementById("inputProduto").value;
-    const valor = document.getElementById("inputValor").value;
+    
+    // Obtém o valor formatado com vírgula do input
+    let valorInput = document.getElementById("inputValor").value; 
+    
+    // TRATAMENTO CRUCIAL: Substitui vírgula por ponto para o cálculo matemático em JS
+    // Remove pontos se houverem (evitando 1.000,50), e substitui a vírgula por ponto.
+    const valorNumerico = valorInput.replace(/\./g, '').replace(',', '.');
 
-    if (!quantidade || !produto || !valor) {
-        alert("Preencha todos os campos!");
+
+    if (!quantidade || !produto || !valorNumerico || isNaN(parseFloat(valorNumerico))) {
+        alert("Preencha todos os campos e certifique-se que o valor é válido!");
         return;
     }
 
@@ -22,12 +55,14 @@ function salvarProduto() {
 
     const li = document.createElement("li");
 
-    const totalItem = quantidade * parseFloat(valor);
+    // Cálculo usando o valor convertido (com ponto)
+    const totalItem = parseFloat(quantidade) * parseFloat(valorNumerico);
 
     li.setAttribute("data-valor", totalItem);
 
     const texto = document.createElement("span");
-    texto.textContent = `${quantidade}x ${produto} — R$ ${valor}`;
+    // Exibe o valor do input (com vírgula)
+    texto.textContent = `${quantidade}x ${produto} — R$ ${valorInput}`;
 
     const btnRemover = document.createElement("button");
     btnRemover.textContent = "X";
@@ -43,12 +78,7 @@ function salvarProduto() {
 
     lista.appendChild(li);
 
-    fecharPopup();
-
-    // Limpar campos
-    document.getElementById("inputQuantidade").value = "";
-    document.getElementById("inputProduto").value = "";
-    document.getElementById("inputValor").value = "";
+    fecharPopup(); // fecharPopup agora também limpa os campos
 
     salvarListaLocalStorage();
     atualizarTotal();
@@ -65,7 +95,7 @@ function atualizarTotal() {
     });
 
     document.getElementById("totalCompras").textContent =
-        "Total: R$ " + total.toFixed(2);
+        "Total: R$ " + total.toFixed(2).replace('.', ','); // Exibe o total com vírgula
 
     localStorage.setItem("totalCompras", total);
 }
@@ -121,6 +151,18 @@ function carregarLista() {
 window.onload = () => {
     carregarLista();
     atualizarTotal();
+    
+    // Adiciona o listener de formatação ao campo de valor (MODIFICAÇÃO SOLICITADA)
+    const inputValor = document.getElementById("inputValor");
+    if (inputValor) {
+        // 'input' é disparado a cada tecla digitada
+        inputValor.addEventListener("input", formatarValorInput);
+        
+        // Move o cursor para o final após a formatação (melhora a UX)
+        inputValor.addEventListener("click", (e) => {
+            e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+        });
+    }
 };
 
 function compartilharLista() {
